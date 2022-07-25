@@ -196,7 +196,7 @@ class InputChunkProtocol(asyncio.Protocol):
                                 {"path": "tf03.connected", "value": True},
                                 {"path": "tf03.noReading", "value": beyond_range},
                                 {"path": "tf03.errored", "value": errored},
-                                {"path": "tf03.frames", "value": frames},
+                                # {"path": "tf03.frames", "value": frames},
                             ]
                         }
                     ]
@@ -207,9 +207,9 @@ class InputChunkProtocol(asyncio.Protocol):
                         {
                             "values": [
                                 {"path": "tf03.outOfRange", "value": False},
-                                {"path": "tf03.altitude", "value": distance},
+                                {"path": "tf03.altitude", "value": distance*0.01},
                                 {"path": "tf03.errored", "value": errored},
-                                {"path": "tf03.frames", "value": frames},
+                                # {"path": "tf03.frames", "value": frames},
                                 {"path": "tf03.connected", "value": True},
                             ]
                         }
