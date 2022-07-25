@@ -193,6 +193,7 @@ class InputChunkProtocol(asyncio.Protocol):
                         {
                             "values": [
                                 {"path": "tf03.outOfRange", "value": True},
+                                {"path": "tf03.connected", "value": True},
                                 {"path": "tf03.noReading", "value": beyond_range},
                                 {"path": "tf03.errored", "value": errored},
                                 {"path": "tf03.frames", "value": frames},
@@ -209,6 +210,7 @@ class InputChunkProtocol(asyncio.Protocol):
                                 {"path": "tf03.altitude", "value": distance},
                                 {"path": "tf03.errored", "value": errored},
                                 {"path": "tf03.frames", "value": frames},
+                                {"path": "tf03.connected", "value": True},
                             ]
                         }
                     ]
@@ -255,6 +257,18 @@ async def reader():
 
             except Exception as e:
                 logger.error(f"{e}")
+                skData = {
+                    "updates": [
+                         {
+                             "values": [
+                                 {"path": "tf03.connected", "value": False}
+                             ]
+                         }
+                    ]
+                }
+                sys.stdout.write(json.dumps(skData))
+                sys.stdout.write("\n")
+                sys.stdout.flush()
                 time.sleep(open_retry)
 
         await asyncio.sleep(chunk_delay)
