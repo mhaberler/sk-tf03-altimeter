@@ -8,7 +8,7 @@ module.exports = function (app) {
   let child
  return {
     start: options => {
-      child = spawn('python', ['plugin.py'], { cwd: __dirname })
+      child = spawn('python', ['tf03.py'], { cwd: __dirname })
 
       child.stdout.on('data', data => {
         // app.debug(data.toString())

@@ -1,11 +1,11 @@
 {
-  "name": "sk-plugin-python-demo",
+  "name": "sk-tf03-altimeter",
   "version": "1.0.0",
-  "description": "Demo Signal K Node server plugin that uses Python",
+  "description": "Signal K Node server plugin to decode Benewake TF03 distance readings",
   "main": "index.js",
   "keywords": [
     "signalk-node-server-plugin"
   ],
-  "author": "Teppo Kurki <teppo.kurki@iki.fi> (https://github.com/tkurki)",
+  "author": "Michael Haberler <git@mah.priv.at> (https://github.com/mhaberler)",
   "license": "Apache-2.0"
 }
