@@ -192,7 +192,8 @@ class InputChunkProtocol(asyncio.Protocol):
                     "updates": [
                         {
                             "values": [
-                                {"path": "tf03.beyond_range", "value": beyond_range},
+                                {"path": "tf03.outOfRange", "value": True},
+                                {"path": "tf03.noReading", "value": beyond_range},
                                 {"path": "tf03.errored", "value": errored},
                                 {"path": "tf03.frames", "value": frames},
                             ]
@@ -204,6 +205,7 @@ class InputChunkProtocol(asyncio.Protocol):
                     "updates": [
                         {
                             "values": [
+                                {"path": "tf03.outOfRange", "value": False},
                                 {"path": "tf03.altitude", "value": distance},
                                 {"path": "tf03.errored", "value": errored},
                                 {"path": "tf03.frames", "value": frames},
@@ -233,10 +235,12 @@ async def reader():
                 # protocol.send_command("5A 04 10 6E", comment="restore factory settings")
 
                 protocol.transport = transport
-                protocol.send_command("5A 05 07 00 66", comment="disable output")
+                protocol.send_command(
+                    "5A 05 07 00 66", comment="disable output")
 
                 await asyncio.sleep(1)
-                protocol.send_command("5A 04 01 5F", comment="get version number")
+                protocol.send_command(
+                    "5A 04 01 5F", comment="get version number")
 
                 await asyncio.sleep(1)
                 protocol.send_command(
@@ -246,7 +250,8 @@ async def reader():
                 )
 
                 await asyncio.sleep(1)
-                protocol.send_command("5A 05 07 01 67", comment="enable output")
+                protocol.send_command(
+                    "5A 05 07 01 67", comment="enable output")
 
             except Exception as e:
                 logger.error(f"{e}")
